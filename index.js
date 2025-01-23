@@ -3,7 +3,7 @@ const axios = require('axios');
 const requestIp = require('request-ip');
 const env = require('dotenv'). config();
 
-const PORT = process.env.PORT || 4000;
+const port = process.env.PORT || 4000;
 
 const app = express();
 
@@ -20,7 +20,7 @@ app.get('/weather/:name', async (req, res) => {
     const ip = req.clientIp;
     const name = req.params.name;
 
-const location = await axios.get(`https://api.ipgeolocation.io/ipgeo?apiKey=${process.env.GEO_API}&ip=8.8.8.8`);
+const location = await axios.get(`https://api.ipgeolocation.io/ipgeo?apiKey=${process.env.GEO_API}&ip=${ip}`);
 
     console.log(location);
     
@@ -45,6 +45,6 @@ console.log(process.env.WEATHER_API);
 })
 
 
-app.listen(3500, () => {
-    console.log(`server is running on http://localhost:${PORT}`);
+app.listen(port, () => {
+    console.log(`server is running on http://localhost:${port}`);
 });
